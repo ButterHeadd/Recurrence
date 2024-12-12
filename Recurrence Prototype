@@ -1,0 +1,602 @@
+//main.cpp
+#include <iostream>
+#include <string>
+#include <limits>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+using namespace std; 
+
+/*
+using std::cin;
+using std::cout;
+using std::string;
+using std::endl;
+using std::numeric_limits;
+using std::streamsize;
+*/
+
+struct StatStruct {
+    int selection, new_max_health, new_strength, new_speed, new_magic;
+    //Sets up the stats already, so they can be used for both the player and enemies.
+    string name;
+    int level;
+    int experience;
+    int max_exp;
+    int stat_points;
+    int max_health;
+    int health;
+    int strength;
+    int speed;
+    int magic;
+    int magic_points;
+    int max_magic_points;
+    int enemies_killed;
+    
+    int StartingStats() {
+    //What stats the player starts with, before the game starts and stat allocation.
+    cout << "Enter your character's name." << endl;
+    cin >> name;
+    stat_points = 40;
+    level = 1;
+    experience = 0;
+    max_exp = 20;
+    max_health = 0;
+    strength = 0;
+    speed = 0;
+    magic = 0;
+    max_magic_points = 5;
+    magic_points = max_magic_points;
+    enemies_killed = 0;
+    return name, stat_points, level, experience, max_exp, max_health, strength, speed, magic, magic_points, max_magic_points, enemies_killed;
+}
+    
+    void Select() {
+        //Select which stat you want to increase.
+        cout << "Select which stat you would like to add to. You have " << stat_points << " stat points." << endl;
+        cout << "1. Max Health." << endl;
+        cout << "2. Strength." << endl;
+        cout << "3. Speed." << endl;
+        cout << "4. Magic." << endl;
+        cout << "5. Check Stats." << endl;
+        cout << "6. Done." << endl;
+        cin >> selection;
+    while(1) {
+        if(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection > 6) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection < 1) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection == 1) {
+            Max_Health_Allocation();
+        } else if(selection == 2) {
+            Strength_Allocation();
+        } else if(selection == 3) {
+            Speed_Allocation();
+        } else if( selection == 4) {
+            Magic_Allocation();
+        } else if(selection == 5) {
+            Check_Stats();
+        } else if(selection == 6) {
+            Finish_Allocation();
+        }
+        if(!cin.fail())
+        break;
+    } 
+    }
+    void Select2() {
+        //Same as select, but doesn't repeat the options.
+        cout << "Select which stat you would like to add to. You have " << stat_points << " stat points." << endl;
+        cin >> selection;
+    while(1) {
+        if(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection > 6) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection < 1) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "You have entered the wrong input." << endl;
+            cin >> selection;
+        } else if(selection == 1) {
+            Max_Health_Allocation();
+        } else if(selection == 2) {
+            Strength_Allocation();
+        } else if(selection == 3) {
+            Speed_Allocation();
+        } else if(selection ==4) {
+            Magic_Allocation();
+        } else if(selection == 5) {
+            Check_Stats();
+        } else if(selection == 6) {
+            Finish_Allocation();
+        }
+        if(!cin.fail())
+        break;
+    }
+    }
+    int Max_Health_Allocation() {
+        //Raise Max Health stat.
+        if(new_max_health <= 1) {
+            stat_points = new_max_health + stat_points;
+            max_health = max_health - new_max_health;
+        }
+        new_strength = 0;
+        cout << "Max Health is currently at " << max_health << endl;
+        cin >> new_max_health;
+        while(1) {
+        if(new_max_health > stat_points) {
+            cout << "You don't have enough stat points for that. You only have " << stat_points << ". Please try again." << endl;
+            cin >> new_max_health;
+        } else {
+            break;
+        }
+        }
+        stat_points = stat_points - new_max_health;
+        max_health = max_health + new_max_health;
+        Select2();
+        return stat_points, max_health;
+    }
+    int Strength_Allocation() { 
+        //Raise strength stat.
+        if(new_strength <= 1) {
+            stat_points = new_strength + stat_points;
+            strength = strength - new_strength;
+        }
+        new_strength = 0;
+        cout << "Strength is currently at " << strength << endl;
+        cin >> new_strength;
+        while(1) {
+        if(new_strength > stat_points) {
+            cout << "You don't have enough stat points for that. You only have " << stat_points << ". Please try again." << endl;
+            cin >> new_strength;
+        } else {
+            break;
+        }
+        }
+        strength = new_strength + strength;
+        stat_points = stat_points - new_strength;
+        Select2();
+        return stat_points, strength;
+    }
+    int Speed_Allocation() {
+        //Raise speed stat.
+        if(new_speed <= 1) { 
+            stat_points = new_speed + stat_points;
+            speed = speed - new_speed;
+        }
+        new_speed = 0;
+        cout << "Speed is currently at " << speed << endl;
+        cin >> new_speed;
+        while(1) {
+        if(new_speed > stat_points) {
+            cout << "You don't have enough stat points for that. You only have " << stat_points << ". Please try again." << endl;
+            cin >> new_speed;
+        } else {
+            break;
+        }
+        }
+        speed = new_speed + speed;
+        stat_points = stat_points - new_speed;
+        Select2();
+        return stat_points, speed;
+    }
+    
+    int Magic_Allocation() {
+        //Raise magic stat.
+        if(new_magic <= 1) { 
+            stat_points = new_magic + stat_points;
+            magic = magic - new_magic;
+        }
+        new_magic = 0;
+        cout << "Magic is currently at " << magic << endl;
+        cin >> new_magic;
+        while(1) {
+        if(new_magic > stat_points) {
+            cout << "You don't have enough stat points for that. You only have " << stat_points << ". Please try again." << endl;
+            cin >> new_magic;
+        } else {
+            break;
+        }
+        }
+        magic = new_magic + magic;
+        stat_points = stat_points - new_magic;
+        Select2();
+        return stat_points, magic;
+    }
+    void Check_Stats() {
+        //See all stats.
+        cout << "Stat Points: " << stat_points << endl;
+        cout << "Max Health: " << max_health << endl;
+        cout << "Strength: " << strength << endl;
+        cout << "Speed: " << speed << endl;
+        cout << "Magic: " << magic << endl;
+        Select2();
+    }
+    int Finish_Allocation() {
+        health = max_health;
+        return 0;
+    }
+};
+
+class Enemies {
+    
+    public:
+    
+      string ename;
+      int emax_health;
+      int ehealth;
+      int estrength;
+      int espeed;
+      int exp_gain;
+      int elevel;
+      int emagic;
+  
+  void Zombie() {
+      ename = "Zombie";
+      emax_health = 8 + (elevel * 2);
+      estrength = 12 + (elevel * 4);
+      espeed = 5 + (elevel * 1);
+      emagic = 0;
+      srand(time(NULL));
+      exp_gain = 3+rand()%(2-6) + (elevel * 3);
+  }
+  void Haunted_Armour() {
+      ename = "Haunted Armour";
+      emax_health = 12 + (elevel * 4);
+      estrength = 5 + (elevel * 2);
+      espeed = 8 + (elevel * 1);
+      emagic = 0;
+      srand(time(NULL));
+      exp_gain = 3+rand()%(2-6) + (elevel * 3);
+  }
+  void Arachnid() {
+      ename = "Arachnid";
+      emax_health = 5 + (elevel * 1);
+      estrength = 8 + (elevel * 2);
+      espeed = 10 + (elevel * 4);
+      emagic = 0;
+      srand(time(NULL));
+      exp_gain = 3+rand()%(2-6) + (elevel * 3);
+  }
+  
+  int Enemy_Spawn() {
+      //Need to finish, needs if command to assign numbers to each enemy.
+      srand(time(NULL));
+      int encounter = 1+(rand()%3);
+      if(encounter == 1) {
+          Zombie();
+          return 0;
+      } else if(encounter == 2) {
+          Haunted_Armour();
+          return 0;
+      } else if(encounter == 3) {
+          Arachnid();
+          return 0;
+      } else {
+          return 0;
+      }
+  }
+  void Enemy_Reset() {
+      emax_health = 0;
+      ehealth = 0;
+      estrength = 0;
+      espeed = 0;
+      emagic = 0;
+      exp_gain = 0;
+      elevel = 0;
+  }
+};
+
+class mainclass {
+    //How the game runs. Put everything in private, apart from mainsub.
+    StatStruct player;
+    Enemies enemy;
+    int damage;
+    string command;
+    private:
+    
+    void Draw_Main() {
+    //Creates the game's visible layout.
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << player.name << endl;
+    //Box / list of choices
+    cout << "Level: " << player.level << endl;
+    cout << "Experience: " << player.experience << "/" << player.max_exp  << endl;
+    cout << "Health: " << player.health << "/" << player.max_health << endl;
+    cout << "MP: " << player.magic_points << "/" << player.max_magic_points << endl;
+    cout << "." << endl;
+    cout << "Commands:    " << "Menu    " << "Fight     " << endl;
+    //Needs validation
+    cin >> command;
+    while (1) {
+    if(command == "Menu") {
+        Draw_Menu();
+        break;
+    } else if(command == "menu") {
+        Draw_Menu();
+        break;
+    } else if(command == "Fight") {
+        Draw_Fight();
+        break;
+    } else if(command == "fight") {
+        Draw_Fight();
+        break;
+    } else { 
+        cout << "Please input a command." << endl;
+        cin >> command;
+    }
+    }
+    }
+    
+    void Draw_Menu() {
+        int levelrand;
+        enemy.Enemy_Reset();
+        srand(time(NULL));
+        levelrand = (1+(rand()%3));
+        if(levelrand == 1) {
+            enemy.elevel = player.level - 1;
+        } else if(levelrand == 2) {
+            enemy.elevel = player.level;
+        } else if(levelrand == 3) {
+            enemy.elevel = player.level + 1;
+        }
+        if(enemy.elevel < 0) {
+            enemy.elevel == 0;
+        } else {
+            enemy.elevel = enemy.elevel;
+        }
+        cout << ". . . . ." << endl;
+        cout << player.name << "    LVL: " << player.level << "    EXP:" << player.experience << "/" << player.max_exp << endl;
+        cout << "Strength: " << player.strength << endl;
+        cout << "Speed: " << player.speed << endl;
+        cout << "Magic: " << player.magic << endl;
+        cout << "Health: " << player.health << "/" << player.max_health << endl;
+        cout << "MP: " << player.magic_points << "/" << player.max_magic_points << endl;
+        cout << "." << endl;
+        cout << "Enemies Defeated: " << player.enemies_killed << endl;
+        cout << "." << endl;
+        cout << "Commands:    " << "Back    " << endl;
+        cin >> command;
+        while(1) {
+        if(command == "back") {
+            Draw_Main();
+            break;
+        } else if(command == "Back") {
+            Draw_Main();
+            break;
+        } else {
+            cout << "Please input a valid command." << endl;
+            cin >> command;
+        }
+        }
+    }
+    
+    void Level_Up() {
+        player.stat_points = 10;
+        player.experience = player.experience - player.max_exp;
+        player.max_exp = player.max_exp + 5;
+        player.max_magic_points = player.max_magic_points + 5;
+        player.magic_points = player.max_magic_points;
+        player.level = player.level + 1;
+        player.Select();
+        Draw_Main();
+    }
+    
+    void Draw_Fight() {
+        enemy.Enemy_Spawn();
+        enemy.ehealth = enemy.emax_health;
+        cout << enemy.ename << "    LVL:" << enemy.elevel << endl;
+        cout << "." << endl;
+        cout << "Commands:    " << "Attack    " << "Run    " << "Scan    " << endl;
+        if(player.speed > enemy.espeed) {
+            Player_Turn();
+        } else if(player.speed < enemy.espeed) {
+            Enemy_Turn();
+        }
+        }
+    
+    void Player_Turn() {
+        //Add magic command.
+        cout << "Your turn." << endl;
+        cin >> command;
+        while(1) {
+            if(command == "Attack") {
+                Fight_Attack();
+                break;
+            } else if(command == "attack") {
+                Fight_Attack();
+                break;
+            } else if(command == "Scan") {
+                Fight_Scan();
+                break;
+            } else if(command == "scan") { 
+                Fight_Scan();
+                break;
+            } else if(command == "Run") {
+                Fight_Run();
+                break;
+            } else if(command == "run") {
+                Fight_Run();
+                break;
+            } else { 
+                cout << "Please enter a command." << endl;
+                cin >> command;
+            }
+        } 
+        if(enemy.ehealth <= 0) {
+            Enemy_Defeated();
+        } else {
+            Enemy_Turn();
+        }
+    }
+    
+    void Enemy_Turn() {
+        cout << "Enemy turn." << endl;
+        damage = enemy.estrength;
+        player.health = player.health - damage;
+        cout << enemy.ename << "did" << damage << "amount of damage!" << endl;
+        if(player.health <= 0) {
+            Game_Over();
+        } else {
+        Player_Turn();
+        }
+    }
+    
+    void Enemy_Defeated() {
+        int levelrand;
+        player.experience = player.experience + enemy.exp_gain;
+        player.enemies_killed = player.enemies_killed + 1;
+        cout << enemy.ename << " has been defeated!" << endl;
+        cout << "You have gained " << enemy.exp_gain << " experience!" << endl;
+        enemy.Enemy_Reset();
+        player.health = player.max_health;
+        if(player.experience >= player.max_exp) {
+            Level_Up();
+        } else {
+            srand(time(NULL));
+        levelrand = (1+(rand()%3));
+        if(levelrand == 1) {
+            enemy.elevel = player.level - 1;
+        } else if(levelrand == 2) {
+            enemy.elevel = player.level;
+        } else if(levelrand == 3) {
+            enemy.elevel = player.level + 1;
+        }
+        if(enemy.elevel < 0) {
+            enemy.elevel == 0;
+        } else {
+            enemy.elevel = enemy.elevel;
+        }
+        cout << "Next battle?" << endl;
+        cout << "." << endl;
+        cout << "Commands: " << "    Next" << "    Back" << endl;
+        cin >> command;
+        while(1) {
+        if(command == "Next") {
+            Draw_Fight();
+            break;
+        } else if(command == "next") {
+            Draw_Fight();
+            break;
+        } else if(command == "Back") {
+            Draw_Main();
+            break;
+        } else if(command == "back") {
+            Draw_Main();
+            break;
+        } else {
+            cout << "Please input a command." << endl;
+            cin >> command;
+        }
+    }
+    }
+    }
+    
+    void Game_Over() {
+        cout << "You have been defeated." << endl;
+        player.health = player.max_health;
+        enemy.Enemy_Reset();
+        Draw_Main();
+    }
+    
+    void Fight_Attack() {
+        damage = player.strength;
+        enemy.ehealth = enemy.ehealth - damage;
+        cout << "You did " << damage << "amount of damage!" << endl;
+    }
+    
+    void Fight_Run() {
+        int run;
+        srand(time(NULL));
+        run = 1+rand()%(2);
+        if(run == 2) {
+            player.health = player.max_health;
+            Draw_Main();
+        } else if(run == 1) {
+            cout << "You tripped, and failed to get away." << endl;
+            Enemy_Turn();
+        }
+    }
+    
+    void Fight_Scan() {
+        cout << enemy.ename << endl;
+        cout << "Health: " << enemy.ehealth << "/" << enemy.emax_health << endl;
+        cout << "Strength: " << enemy.estrength << endl;
+        cout << "Speed: " << enemy.espeed << endl;
+        cout << "Magic: " << enemy.emagic << endl;
+    }
+    
+    void Fight_Magic() {
+        int magicchoice;
+        cout << "1. Heal" << endl;
+        cin >> magicchoice;
+        while(1) {
+        if(magicchoice == 1) {
+            Magic_Heal();
+        } else {
+            cout << "Please choose a spell." << endl;
+            cin >> magicchoice;
+        }
+    }
+    }
+    
+    void Magic_Heal() {
+        float healamount;
+        healamount = round(0.75 * player.magic);
+        player.health = player.health + healamount;
+        if(player.health > player.max_health) {
+            player.health = player.max_health;
+        } else {
+            player.health = player.health;
+        }
+    }
+    
+    public:
+    
+    void mainsub() {
+        player.StartingStats();
+        player.Select();
+        Draw_Main();
+    }
+};
+
+int main() {
+    mainclass run;
+    run.mainsub();
+    return 0;
+}
+
+/*
+Bugs:
+-Magic sometimes displays random number??
+
+Fixed Bugs:
+-Max health displays random number during stat allocation, but after it goes back to normal.
+-Run doesn’t work, if tripping it just spams the text.
+- Experience drops, but it doesn't tell us how much (says "You have gained 0 experience")
+-Statpoints go over 0.
+-For some reason, speed is inaccurate in enemies. Lowered???
+-Enemies can be level -1.
+-Enemies are always the same level due to how the random generating works. For example, zombies always -1.
+*/
