@@ -1,6 +1,5 @@
 #ifndef ENEMIES_H
 #define ENEMIES_H
-#include "stats.h"
 #include "items.h"
 #include <iostream>
 #include <string>
@@ -11,27 +10,24 @@ using namespace std;
 
 class Enemies {
 public:
-	StatStruct enemystats;
-	string name;
-	int level;
-	int experience;
-	int max_exp;
-	int stat_points;
-	int max_health;
-	int health;
-	int strength;
-	int defence;
-	int speed;
-	int magic;
-	int magic_attack;
-	int magic_defence;
-	int max_magic_points;
-	int magic_points;
+	string ename;
+	int emax_health;
+	int ehealth;
+	int emax_magic_points;
+	int emagic_points;
+	int estrength;
+	int edefence;
+	int espeed;
+	int exp_gain;
+	int elevel;
+	int emagic_attack;
+	int emagic_defence;
+
+	void EnemyStartingStats();
 	void Zombie();
 	void Haunted_Armour();
 	void Arachnid();
 	int Enemy_Spawn();
-	void Enemy_Reset();
 };
 
 #endif

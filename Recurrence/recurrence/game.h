@@ -2,6 +2,7 @@
 #define GAME_H
 #include "stats.h"
 #include "enemies.h"
+#include "validation.h"
 #include <iostream>
 #include <string>
 #include <ctime>

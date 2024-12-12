@@ -1,6 +1,6 @@
 #ifndef STATS_H
 #define STATS_H
-
+#include "validation.h"
 #include <iostream>
 #include <string>
 #include <limits>

@@ -7,7 +7,7 @@ void StatStruct::StartingStats() {
 	level = 1;
 	experience = 0;
 	max_exp = 20;
-	max_health = 0;
+	max_health = 10;
 	new_max_health = 0;
 	strength = 0;
 	new_strength = 0;
@@ -18,13 +18,62 @@ void StatStruct::StartingStats() {
 	new_magic = 0;
 	magic_attack = 0;
 	magic_defence = 0;
-	max_magic_points = 0;
+	max_magic_points = 5;
 	new_max_mp = 0;
 	enemies_killed = 0;
 }
 
 void StatStruct::Select() {
 	cout << "Select which stat you would like to add to. You have " << stat_points << " stat points." << endl << "1. Max Health." << endl << "2. Max MP." << endl << "3. Strength." << endl << "4. Speed" << endl << "5. Magic." << endl << "6. Check Stats." << endl << "7. Done" << endl;
+	selection == Integer_Validation(7, 1);
+	while (1) {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "You have entered the wrong input." << endl;
+			cin >> selection;
+		}
+		else if (selection > 7) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "You have entered the wrong input." << endl;
+			cin >> selection;
+		}
+		else if (selection < 1) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "You have entered the wrong input." << endl;
+			cin >> selection;
+		}
+		else if (selection == 1) {
+			Max_Health_Allocation();
+		}
+		else if (selection == 2) {
+			Max_MP_Allocation();
+		}
+		else if (selection == 3) {
+			Strength_Allocation();
+		}
+		else if (selection == 4) {
+			Speed_Allocation();
+		}
+		else if (selection == 5) {
+			Magic_Allocation();
+		}
+		else if (selection == 6) {
+			Check_Stats();
+		}
+		else if (selection == 7) {
+			Finish_Allocation();
+		}
+		if (!cin.fail()) {
+			break;
+		}
+	}
+}
+
+void StatStruct::Select2() {
+	cout << "Select which stat you would like to add to. You have " << stat_points << " stat points." << endl;
 	cin >> selection;
 	while (1) {
 		if (cin.fail()) {
@@ -61,10 +110,10 @@ void StatStruct::Select() {
 			Magic_Allocation();
 		}
 		else if (selection == 6) {
-			//Check_Stats();
+			Check_Stats();
 		}
 		else if (selection == 7) {
-			//Finish_Allocation();
+			Finish_Allocation();
 		}
 		if (!cin.fail()) {
 			break;
@@ -90,7 +139,7 @@ void StatStruct::Max_Health_Allocation() {
 	}
 	stat_points = stat_points - new_max_health;
 	max_health = max_health + new_max_health;
-	Select();
+	Select2();
 }
 
 void StatStruct::Max_MP_Allocation() {
@@ -112,7 +161,7 @@ void StatStruct::Max_MP_Allocation() {
 	}
 	stat_points = stat_points - new_max_mp;
 	max_magic_points = max_magic_points + new_max_mp;
-	Select();
+	Select2();
 }
 
 void StatStruct::Strength_Allocation() {
@@ -134,7 +183,7 @@ void StatStruct::Strength_Allocation() {
 	}
 	stat_points = stat_points - new_strength;
 	strength = strength + new_strength;
-	Select();
+	Select2();
 }
 
 void StatStruct::Speed_Allocation() {
@@ -156,12 +205,12 @@ void StatStruct::Speed_Allocation() {
 	}
 	stat_points = stat_points - new_speed;
 	speed = speed + new_speed;
-	Select();
+	Select2();
 }
 
 void StatStruct::Magic_Allocation() {
 	if (new_magic < 1) {
-		stat_points = new_speed + stat_points;
+		stat_points = new_magic + stat_points;
 		magic_attack = magic_attack - new_magic;
 		magic_defence = magic_defence - new_magic;
 	}
@@ -180,5 +229,37 @@ void StatStruct::Magic_Allocation() {
 	stat_points = stat_points - new_magic;
 	magic_attack = magic_attack + new_magic;
 	magic_defence = magic_defence + new_magic;
-	Select();
+	Select2();
+}
+
+void StatStruct::Check_Stats() {
+	cout << "Stat Points: " << stat_points << endl << "Max Health: " << max_health << "   (+" << new_max_health << ")" << endl << "Max MP: " << max_magic_points << "   (+" << new_max_mp << ")" << endl << "Strength: " << strength << "   (+" << new_strength << ")" << endl << "Defence: " << defence << endl << "Speed: " << speed << "   (+" << new_speed << ")" << endl << "Magic Attack: " << magic_attack << "   (+" << new_magic << ")" << endl << "Magic Defence: " << magic_defence << "   (+" << new_magic << ")" << endl;
+	Select2();
+}
+
+int StatStruct::Finish_Allocation() {
+	if (stat_points > 1) {
+		cout << "You still have " << stat_points << " stat points. Are you sure you want to finish?" << endl << "1: Yes." << endl << "2: No." << endl;
+		cin >> selection;
+		if (selection == 1) {
+			health = max_health;
+			new_max_health = 0;
+			new_max_mp = 0;
+			new_strength = 0;
+			new_speed = 0;
+			new_magic = 0;
+			return 0;
+		}
+		else if(selection == 2) {
+			Select2();
+		}
+	}
+	else {
+		new_max_health = 0;
+		new_max_mp = 0;
+		new_strength = 0;
+		new_speed = 0;
+		new_magic = 0;
+		return 0;
+	}
 }
