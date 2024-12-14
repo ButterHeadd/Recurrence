@@ -9,7 +9,7 @@
 
 using namespace std;
 
-bool Integer_Validation(const int& higher, const int& lower);
+int Integer_Validation(const int& higher, const int& lower);
 bool String_Validation(const string& stringinput);
 bool Command_Validation(const string& stringinput, const string& capital, const string& lowercase);
 

@@ -1,2 +1,4 @@
-﻿  validation.cpp
+﻿  game.cpp
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(68,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(80,16): warning C4553: '==': result of expression not used; did you intend '='?
   recurrence.vcxproj -> C:\Users\Charlie Chase\source\repos\Recurrence\Debug\recurrence.exe

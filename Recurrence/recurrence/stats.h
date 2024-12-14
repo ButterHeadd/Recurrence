@@ -29,7 +29,6 @@ struct StatStruct {
 
 	void StartingStats();
 	void Select();
-	void Select2();
 	void Max_Health_Allocation();
 	void Max_MP_Allocation();
 	void Strength_Allocation();

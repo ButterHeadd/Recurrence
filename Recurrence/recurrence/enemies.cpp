@@ -63,7 +63,6 @@ void Enemies::Arachnid() {
 }
 
 int Enemies::Enemy_Spawn() {
-	EnemyStartingStats();
 	srand(time(NULL));
 	int encounter = 1 + (rand() % 3);
 	if (encounter == 1) {

@@ -13,11 +13,11 @@ class MainClass {
 	StatStruct player;
 	Enemies enemy;
 	int damage;
-	string command;
 	int story_progress;
 
 	void Draw_Main();
 	void Draw_Menu();
+	void Draw_StartMenu();
 	void Level_Up();
 	void Save();
 	void Draw_Fight();
