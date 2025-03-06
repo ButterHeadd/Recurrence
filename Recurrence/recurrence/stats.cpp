@@ -33,6 +33,7 @@ void StatStruct::StartingStats() {
 
 void StatStruct::Select() {
 	int i = 0;
+	int finishselection;
 	cout << endl << endl << "Select which stat you would like to add to. You have " << stat_points << " stat points." << endl << "1. Max Health." << endl << "2. Max MP." << endl << "3. Strength." << endl << "4. Speed" << endl << "5. Magic." << endl << "6. Check Stats." << endl << "7. Done" << endl;
 	while(1) {
 		if (i >= 1) {
@@ -60,8 +61,18 @@ void StatStruct::Select() {
 			Check_Stats();
 		}
 		else if (selection == 7) {
-			Finish_Allocation();
-			break;
+			if (stat_points > 1) {
+				cout << "You still have " << stat_points << " stat points.";
+			}
+			cout << "Are you sure you want to finish ? " << endl << "1. Yes." << endl << "2. No." << endl;
+			cin >> finishselection;
+			if (finishselection == 1) {
+				Finish_Allocation();
+				break;
+			}
+			else if (finishselection == 2) {
+				cout << "Returning to stat selection." << endl;
+			}
 		}
 	}
 }
@@ -177,21 +188,12 @@ void StatStruct::Check_Stats() {
 }
 
 int StatStruct::Finish_Allocation() {
-	if (stat_points > 1) {
-		cout << "You still have " << stat_points << " stat points. Are you sure you want to finish?" << endl << "1: Yes." << endl << "2: No." << endl;
-		cin >> selection;
-		if (selection == 1) {
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			health = max_health;
-			new_max_health = 0;
-			new_max_mp = 0;
-			new_strength = 0;
-			new_speed = 0;
-			new_magic = 0;
-			return 0;
-		}
-		else if(selection == 2) {
-			return 0;
-		}
-	}
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	health = max_health;
+	new_max_health = 0;
+	new_max_mp = 0;
+	new_strength = 0;
+	new_speed = 0;
+	new_magic = 0;
+	return 0;
 }

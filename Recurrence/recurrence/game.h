@@ -14,6 +14,7 @@ class MainClass {
 	Enemies enemy;
 	int damage;
 	int story_progress;
+	string last_turn;
 
 	void Draw_Main();
 	void Draw_Menu();
@@ -26,10 +27,15 @@ class MainClass {
 	void Enemy_Defeated();
 	void Game_Over();
 	void Fight_Attack();
+	void Enemy_Attack();
 	void Fight_Run();
+	void Enemy_Run();
 	void Fight_Scan();
+	void Enemy_Scan();
 	void Fight_Skills();
+	void Enemy_Skills();
 	void Magic_Heal();
+	void Enemy_Magic_Heal();
 
 public:
 	void mainsub();

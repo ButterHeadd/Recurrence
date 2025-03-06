@@ -1,4 +1,8 @@
 ﻿  game.cpp
-C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(68,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(80,16): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(70,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(82,16): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(160,6): warning C4101: 'levelrand': unreferenced local variable
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(207,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(236,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Charlie Chase\source\repos\Recurrence\recurrence\game.cpp(237,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   recurrence.vcxproj -> C:\Users\Charlie Chase\source\repos\Recurrence\Debug\recurrence.exe
