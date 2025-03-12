@@ -7,7 +7,7 @@ While I do intend it to have a story, I'm focusing on the gameplay first and for
 I began this project on my second term of University, as a way of learning C++. This led to me developing an interest in the language, and doubling down on the game. 
 I honestly never imagined I'd get the battle system finished, but it has been done. 
 
-Contemplating redoing it all again in Godot, because graphics are needed and it could be useful.
+Contemplating redoing it all again in Godot, because graphics are needed and it could be useful. If that happens, I'll probably just use GDScript.
 
 To-Do:
 - Fix stat function
