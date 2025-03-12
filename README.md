@@ -8,6 +8,8 @@ I began this project on my second term of University, as a way of learning C++. 
 I honestly never imagined I'd get the battle system finished, but it has been done. 
 
 To-Do:
+- Fix stat function
+ - Allow for exiting during allocation 
 - Save function
 - Finish inventory system
 - Add equips
