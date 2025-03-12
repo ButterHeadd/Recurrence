@@ -9,7 +9,7 @@ I honestly never imagined I'd get the battle system finished, but it has been do
 
 To-Do:
 - Fix stat function
- - Allow for exiting during allocation 
+    - Allow for exiting during allocation 
 - Save function
 - Finish inventory system
 - Add equips
